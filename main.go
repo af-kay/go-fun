@@ -1,42 +1,14 @@
 package main
 
 import (
+	"api"
 	"fmt"
-	"gopkg.in/h2non/gentleman.v2"
 )
 
-func makeClient() *gentleman.Client {
-	base := "https://jsonplaceholder.typicode.com"
-
-	cli := gentleman.New()
-	cli.URL(base)
-
-	return cli
-}
-
-type Request struct {
-	client  *gentleman.Client
-	path    string
-	headers map[string]string
-}
-
-func fetch(request Request) (*gentleman.Response, error) {
-	req := request.client.Request()
-
-	req.Path(request.path)
-	req.SetHeaders(request.headers)
-
-	return req.Send()
-}
-
 func main() {
-	cli := makeClient()
+	cli := api.NewClient()
 
-	res, err := fetch(Request{
-		client:  cli,
-		path:    "/users",
-		headers: map[string]string{"Client": "gentleman"},
-	})
+	res, err := api.Fetch(cli, "/users")
 	if err != nil {
 		fmt.Printf("Request error: %s\n", err)
 		return
