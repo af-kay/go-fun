@@ -7,16 +7,7 @@ import (
 
 func main() {
 	cli := api.NewClient()
+	users := api.GetUsers(cli)
 
-	res, err := api.Fetch(cli, "/users")
-	if err != nil {
-		fmt.Printf("Request error: %s\n", err)
-		return
-	}
-	if !res.Ok {
-		fmt.Printf("Invalid server response: %d\n", res.StatusCode)
-		return
-	}
-
-	fmt.Printf("Body: %s", res.String())
+	fmt.Println("Users:", users)
 }
