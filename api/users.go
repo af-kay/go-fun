@@ -28,14 +28,13 @@ type UserModel struct {
 	} `json:"company"`
 }
 
-func GetUsers() (users []UserModel) {
+func GetUsers() (users []UserModel, err error) {
 	res, err := fetch(getClient(), "/users")
 	if err != nil {
-		panic(err)
+		return
 	}
-
 	if err = json.Unmarshal(res.Bytes(), &users); err != nil {
-		panic(err)
+		return
 	}
 
 	return

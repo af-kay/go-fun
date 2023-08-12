@@ -6,7 +6,10 @@ import (
 )
 
 func main() {
-	users := api.GetUsers()
+	users, err := api.GetUsers()
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println("Users:", users)
 }
