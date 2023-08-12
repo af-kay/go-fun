@@ -6,8 +6,7 @@ import (
 )
 
 func main() {
-	cli := api.NewClient()
-	users := api.GetUsers(cli)
+	users := api.GetUsers()
 
 	fmt.Println("Users:", users)
 }

@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"gopkg.in/h2non/gentleman.v2"
 )
 
 type UserModel struct {
@@ -29,8 +28,8 @@ type UserModel struct {
 	} `json:"company"`
 }
 
-func GetUsers(cli *gentleman.Client) (users []UserModel) {
-	res, err := Fetch(cli, "/users")
+func GetUsers() (users []UserModel) {
+	res, err := fetch(getClient(), "/users")
 	if err != nil {
 		panic(err)
 	}
