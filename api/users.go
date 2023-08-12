@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 type UserModel struct {
@@ -33,9 +34,19 @@ func GetUsers() (users []UserModel, err error) {
 	if err != nil {
 		return
 	}
-	if err = json.Unmarshal(res.Bytes(), &users); err != nil {
+
+	err = json.Unmarshal(res.Bytes(), &users)
+
+	return
+}
+
+func GetUser(id int) (user UserModel, err error) {
+	res, err := fetch(getClient(), fmt.Sprintf("/users/%d", id))
+	if err != nil {
 		return
 	}
+
+	err = json.Unmarshal(res.Bytes(), &user)
 
 	return
 }
