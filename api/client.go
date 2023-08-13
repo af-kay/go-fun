@@ -2,25 +2,36 @@ package api
 
 import "gopkg.in/h2non/gentleman.v2"
 
-var cli *gentleman.Client
+type ApiClient struct {
+	*gentleman.Client
+}
 
-func getClient() *gentleman.Client {
-	if cli != nil {
-		return cli
+type ApiResponse struct {
+	*gentleman.Response
+}
+
+var client *ApiClient
+
+func init() {
+	initClient()
+}
+
+func initClient() {
+	if client != nil {
+		return
 	}
 
 	base := "https://jsonplaceholder.typicode.com"
 
-	cli = gentleman.New()
-	cli.URL(base)
-
-	return cli
+	client = &ApiClient{gentleman.New()}
+	client.URL(base)
 }
 
-func fetch(cli *gentleman.Client, path string) (*gentleman.Response, error) {
+func (cli *ApiClient) fetch(path string) (*ApiResponse, error) {
 	req := cli.Request()
-
 	req.Path(path)
 
-	return req.Send()
+	response, err := req.Send()
+
+	return &ApiResponse{response}, err
 }

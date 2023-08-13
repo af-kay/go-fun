@@ -30,7 +30,7 @@ type UserModel struct {
 }
 
 func GetUsers() (users []UserModel, err error) {
-	res, err := fetch(getClient(), "/users")
+	res, err := client.fetch("/users")
 	if err != nil {
 		return
 	}
@@ -41,7 +41,7 @@ func GetUsers() (users []UserModel, err error) {
 }
 
 func GetUser(id int) (user UserModel, err error) {
-	res, err := fetch(getClient(), fmt.Sprintf("/users/%d", id))
+	res, err := client.fetch(fmt.Sprintf("/users/%d", id))
 	if err != nil {
 		return
 	}
