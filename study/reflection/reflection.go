@@ -7,7 +7,7 @@ func NaiveIsNil(o interface{}) bool {
 }
 
 func IsNil(o interface{}) bool {
-	if NaiveIsNil(o) {
+	if o == nil {
 		return true
 	}
 
