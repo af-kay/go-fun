@@ -3,4 +3,3 @@
 go test study/... -coverprofile=coverage/coverage.out && \
   gcov2lcov -infile=coverage/coverage.out -outfile=coverage/lcov.info && \
   rm coverage/coverage.out
-
