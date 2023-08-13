@@ -14,5 +14,6 @@ func TestCircularBuffer(t *testing.T) {
 			buf.AddValue(float64(i))
 		}
 		assert.EqualValues(t, expected[i], buf.GetValues())
+		assert.Equal(t, len(expected[i]), buf.GetCurrentSize())
 	}
 }
