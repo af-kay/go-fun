@@ -2,11 +2,11 @@ package reflection
 
 import "reflect"
 
-func NaiveIsNil(o any) bool {
+func NaiveIsNil(o interface{}) bool {
 	return o == nil
 }
 
-func IsNil(o any) bool {
+func IsNil(o interface{}) bool {
 	if NaiveIsNil(o) {
 		return true
 	}
